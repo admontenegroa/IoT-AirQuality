@@ -1,0 +1,30 @@
+{
+  "name": "iot-airquality",
+  "version": "1.0.0",
+  "description": "IoT with MQTT Protocol to Air Quality Measure",
+  "main": "publisher.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/admontenegroa/IoT-AirQuality.git"
+  },
+  "keywords": [
+    "Iot",
+    "MQTT",
+    "Air",
+    "Quality",
+    "NodeJs",
+    "ExpressJs"
+  ],
+  "author": "Andrés D. Montenegro A.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/admontenegroa/IoT-AirQuality/issues"
+  },
+  "homepage": "https://github.com/admontenegroa/IoT-AirQuality#readme",
+  "dependencies": {
+    "mqtt": "^3.0.0"
+  }
+}

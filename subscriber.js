@@ -2,7 +2,7 @@ var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://test.mosquitto.org')
 
 client.on('connect', function () {
-  client.subscribe('CarbonMonoxide');
+  client.subscribe('AirQuality');
 })
 
 client.on('message', function (topic, message) {

@@ -30,11 +30,9 @@
 // Update these with values suitable for your network.
 //Credenciales WiFi
 //Nombre de la Red WiFi
-//const char* ssid = "Invitados_UDistrital";
-const char* ssid = "Familia Alvarado";
+const char* ssid = "RedWiFi";
 //Contraseña de la Red WiFi
-//const char* password = "1nv1tad05";
-const char* password = "19190017";
+const char* password = "Contraseña";
 
 //MQTT Broker
 const char* mqtt_server = "broker.mqtt-dashboard.com";

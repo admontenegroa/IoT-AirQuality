@@ -30,13 +30,12 @@
 // Update these with values suitable for your network.
 //Credenciales WiFi
 //Nombre de la Red WiFi
-const char* ssid = "RedWiFi";
+const char* ssid = "NombreRedWiFi";
 //Contraseña de la Red WiFi
-const char* password = "Contraseña";
+const char* password = "ContraseñaWiFi";
 
 //MQTT Broker
-const char* mqtt_server = "broker.mqtt-dashboard.com";
-const char* mqtt_Port = 1883;
+const char* mqtt_server = "test.mosquitto.org";
 
 //Objeto de la Clase WiFiClient para establecer una conexión
 WiFiClient espClient;
@@ -61,13 +60,13 @@ void setup_wifi() {
 
     while (WiFi.status() != WL_CONNECTED) {
       delay(500);
-      Serial.print("Conectando a la red WiFi...");
+      Serial.println("Conectando a la red WiFi...");
   }
 
   randomSeed(micros());
 
   Serial.println("");
-  Serial.println("!Conectado a la red WiFi¡");
+  Serial.println("¡Conectado a la red WiFi!");
   Serial.println("Dirección IP: ");
   Serial.println(WiFi.localIP());
 }
@@ -76,13 +75,13 @@ void setup_wifi() {
 //Manejo de Mensajes Suscritos Recibidos 
 //*************************************************************************
 void callback(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Mensaje Recibido en el topic:");
-  Serial.print(topic);
+  /*Serial.print("Mensaje Recibido en el topic:");
+  Serial.println(topic);
   for (int i = 0; i < length; i++) {
     Serial.print((char)payload[i]);
   }
   Serial.println();
-
+*/
   // Switch on the LED if an 1 was received as first character
   if ((char)payload[0] == '1') {
     digitalWrite(BUILTIN_LED, LOW);   // Turn the LED on (Note that LOW is the voltage level
@@ -97,7 +96,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
-    Serial.print("Intentando establecer una conexión con el Broker MQTT...");
+    Serial.println("Intentando establecer una conexión con el Broker MQTT...");
     //Crea un ID de Cliente Aleatorio
     String clientId = "ESP8266Client-";
     clientId += String(random(0xffff), HEX);
@@ -111,7 +110,7 @@ void reconnect() {
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
-      Serial.println("Intentando conectar en segundos");
+      Serial.println("Intentando conectar en 5 segundos");
       //Espera 5 segundos antes de vovler a intentar
       delay(5000);
     }
@@ -124,7 +123,7 @@ void setup() {
   Serial.begin(115200);
   setup_wifi();
   //Conexión al Broker MQTT
-  client.setServer(mqtt_server, mqtt_Port);
+  client.setServer(mqtt_server, 1883);
   //Función de manejo para la recepción de mensajes MQTT
   client.setCallback(callback);
 }
@@ -141,8 +140,8 @@ void loop() {
   if (now - lastMsg > 2000) {
     lastMsg = now;
     ++value;
-    snprintf (msg, 50, "CO: #%ld ppm", value);
-    Serial.print("Publish message: ");
+    snprintf (msg, 50, "La concentración de CO en el aire es: #%ld ppm", value);
+    Serial.print("Mensaje publicado: ");
     Serial.println(msg);
     client.publish("AirQuality/CO", msg);
   }

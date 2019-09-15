@@ -1,5 +1,5 @@
 var mqtt = require('mqtt')
-var client  = mqtt.connect('http://broker.mqtt-dashboard.com/')
+var client  = mqtt.connect('mqtt://test.mosquitto.org')
 
 client.on('connect', function () {
   client.subscribe('AirQuality/#');

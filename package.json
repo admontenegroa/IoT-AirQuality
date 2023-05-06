@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/admontenegroa/IoT-AirQuality#readme",
   "dependencies": {
-    "mqtt": "^3.0.0"
+    "mqtt": "^4.3.7"
   }
 }
